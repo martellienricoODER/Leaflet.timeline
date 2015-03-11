@@ -165,12 +165,6 @@ http://leafletjs.com
         return this.displayedLayers = this.displayedLayers.filter(function(displayedLayer) {
           return displayedLayer.layer !== layer;
         });
-      //remove control also  
-      var leaflet_timeline_controls_to_remove = document.getElementsByClassName("leaflet-timeline-controls");
-      var i;
-      for (i = 0; i < leaflet_timeline_controls_to_remove.length; i++) {
-        leaflet_timeline_controls_to_remove[i].parentNode.removeChild(leaflet_timeline_controls_to_remove[i]);
-        }
       }
     },
     setTime: function(time) {
@@ -200,7 +194,6 @@ http://leafletjs.com
       return this.fire('change');
     },
     onAdd: function(map) {
-      //var x = document.getElementsByClassName("example");
       L.GeoJSON.prototype.onAdd.call(this, map);
       this.timeSliderControl = L.Timeline.timeSliderControl(this);
       return this.timeSliderControl.addTo(map);
@@ -370,6 +363,14 @@ http://leafletjs.com
     onAdd: function(map) {
       var buttonContainer, container;
       this.map = map;
+      
+      //remove control  
+      var leaflet_timeline_controls_to_remove = document.getElementsByClassName("leaflet-timeline-controls");
+      var i;
+      for (i = 0; i < leaflet_timeline_controls_to_remove.length; i++) {
+        leaflet_timeline_controls_to_remove[i].parentNode.removeChild(leaflet_timeline_controls_to_remove[i]);
+        }
+
       container = L.DomUtil.create('div', 'leaflet-control-layers ' + 'leaflet-control-layers-expanded ' + 'leaflet-timeline-controls ');
       if (this.timeline.options.enablePlayback) {
         buttonContainer = L.DomUtil.create('div', 'button-container', container);
